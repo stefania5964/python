@@ -5,5 +5,7 @@ WORKDIR /app
 
 COPY app.py /app/
 RUN pip install flask
+RUN pip install tensorflow
+RUN pip install numpy
 EXPOSE 4000
 CMD ["python", "app.py"]
