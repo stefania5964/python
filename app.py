@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from tensorflow.keras.models import load_model
+from flask_cors import CORS, cross_origin
 import numpy as np
 import json
 import os
@@ -11,6 +12,8 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 model = load_model("modelo1.keras")
 json_file = open('premierwithplayers.json')
 data = json.load(json_file)
@@ -61,4 +64,4 @@ def predict():
 	
     
 if __name__ == '__main__':
-    app.run(debug = True, port = 4000)
+    app.run(host="0.0.0.0", debug = False, port = 4000)
